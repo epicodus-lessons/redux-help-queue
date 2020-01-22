@@ -12,15 +12,20 @@ class NewTicketControl extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      formVisibleOnPage: false,
+      // formVisibleOnPage: false,
       selectedTicket: null,
       editing: false
     };
   }
 
   handleClick = () => {
+    const { dispatch } = this.props;
+    const action = {
+      type: 'TOGGLE_FORM'
+    }
+    dispatch(action);
     this.setState(oldState => ({
-      formVisibleOnPage: !oldState.formVisibleOnPage,
+      // formVisibleOnPage: !oldState.formVisibleOnPage,
       selectedTicket: null
     }));
   }
@@ -40,7 +45,11 @@ class NewTicketControl extends React.Component {
       issue: issue,
     }
     dispatch(action);
-    this.setState({formVisibleOnPage: false});
+    // this.setState({formVisibleOnPage: false});
+    const action2 = {
+      type: 'TOGGLE_FORM'
+    }
+    dispatch(action2);
   }
 
   handleEditingTicketInList = (ticketToEdit) => {
@@ -59,7 +68,7 @@ class NewTicketControl extends React.Component {
   }
 
   handleChangingSelectedTicket = (id) => {
-    const selectedTicket = this.state.masterTicketList.filter(ticket => ticket.id === id)[0];
+    const selectedTicket = this.props.masterTicketList[id];
     this.setState({selectedTicket: selectedTicket});
   }
 
@@ -86,7 +95,8 @@ class NewTicketControl extends React.Component {
         onClickingDelete = {this.handleDeletingTicket} 
         onClickingEdit = {this.handleEditClick} />
     }
-    else if (this.state.formVisibleOnPage) {
+    // This line is changed from this.state to this.props
+    else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
     } else {
       currentlyVisibleState = <TicketList ticketList={this.props.masterTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;
@@ -107,7 +117,8 @@ NewTicketControl.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    masterTicketList: state
+    masterTicketList: state.masterTicketList,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
