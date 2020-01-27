@@ -1,4 +1,5 @@
 import ticketListReducer from '../../reducers/ticket-list-reducer';
+import * as c from './../../actions/ActionTypes';
 
 describe('ticketListReducer', () => {
 
@@ -29,7 +30,7 @@ describe('ticketListReducer', () => {
   test('Should successfully add new ticket data to masterTicketList', () => {
     const { names, location, issue, id } = ticketData;
     action = {
-      type: 'ADD_TICKET',
+      type: c.ADD_TICKET,
       names: names,
       location: location,
       issue: issue,
@@ -47,7 +48,7 @@ describe('ticketListReducer', () => {
 
   test('Should successfully delete a ticket', () => {
     action = {
-      type: 'DELETE_TICKET',
+      type: c.DELETE_TICKET,
       id: 1
     };
     expect(ticketListReducer(currentState, action)).toEqual({
