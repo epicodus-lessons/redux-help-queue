@@ -31,7 +31,7 @@ class NewTicketControl extends React.Component {
 
   updateTicketElapsedWaitTime = () => {
     const { dispatch } = this.props;
-    Object.keys(this.props.masterTicketList).map(ticketId => {
+    Object.keys(this.props.masterTicketList).forEach(ticketId => {
       const ticket = this.props.masterTicketList[ticketId];
       const newFormattedWaitTime = ticket.timeOpen.fromNow(true);
       const action = a.updateTime(ticketId, newFormattedWaitTime);
