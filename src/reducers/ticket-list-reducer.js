@@ -4,7 +4,6 @@ export default (state = {}, action) => {
   const { names, location, issue, id, formattedWaitTime, timeOpen } = action;
   switch (action.type) {
   case c.ADD_TICKET:
-    debugger;
     return Object.assign({}, state, {
       [id]: {
         names: names,
@@ -20,9 +19,9 @@ export default (state = {}, action) => {
     delete newState[id];
     return newState;
   case c.UPDATE_TIME:
-    const newTicket = Object.assign({}, state[id], {formattedWaitTime});
+    const updatedTicket = Object.assign({}, state[id], {formattedWaitTime});
     const updatedState = Object.assign({}, state, {
-      [id]: newTicket
+      [id]: updatedTicket
     });
     return updatedState;
   default:

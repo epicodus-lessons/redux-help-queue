@@ -6,7 +6,6 @@ import EditTicketForm from './EditTicketForm';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import * as a from './../actions';
-import Moment from 'moment';
 
 class NewTicketControl extends React.Component {
 
