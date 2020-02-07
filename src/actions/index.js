@@ -11,6 +11,42 @@ export const addTicket = (ticket) => {
   });
 }
 
+// export const addTicket = (ticket) => {
+//     const { names, location, issue } = ticket;
+//   return (dispatch, getState, { getFirebase, getFirestore }) => {
+//     const firestore = getFirestore();
+//     firestore.collection('tickets').add({
+//       names: names,
+//       location: location,
+//       issue: issue,
+//       timeOpen: new Date().getTime()
+//     }).then(()=> {
+//       dispatch({ type: 'CREATE_TICKET', ticket });
+//     });
+//   }
+// };
+
+// export const addTicket = (ticket) => {
+//   const { names, location, issue } = ticket;
+//   return () => {
+//     const firestore = useFirestore()
+//     useFirestoreConnect('tickets')
+//     firestore.collection('tickets').add({
+//       names: names,
+//       location: location,
+//       issue: issue,
+//       timeOpen: new Date().getTime()
+//     })
+//       // .then(() => {
+//       //   console.log('Then it was done')
+//       //   dispatch({ type: c.ADD_TICKET, ticket })
+//       // })
+//       // .catch(err => {
+//       //   dispatch({ type: ERROR, err })
+//       // })
+//   }
+// }
+
 
 // export const addTicket = (ticket) => {
 //   const { names, location, issue, id, formattedWaitTime, timeOpen } = ticket;
