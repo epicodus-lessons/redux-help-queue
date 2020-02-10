@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
+import { ReduxFirestoreProvider } from 'redux-firestore'
 import { createFirestoreInstance } from 'redux-firestore'
 import firebase from "./firebase";
 import { store } from "./store";

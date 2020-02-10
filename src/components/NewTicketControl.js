@@ -6,12 +6,12 @@ import EditTicketForm from './EditTicketForm';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import * as a from './../actions';
+import { withFirestore } from 'react-redux-firebase'
 
 class NewTicketControl extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       selectedTicket: null,
       editing: false
@@ -50,31 +50,33 @@ class NewTicketControl extends React.Component {
     this.setState({editing: true});
   }
 
-  handleAddingNewTicketToList = (newTicket) => {
+  handleAddingNewTicketToList = () => {
     const { dispatch } = this.props;
-    const action = a.addTicket(newTicket);
+    const action = a.toggleForm();
     dispatch(action);
-    const action2 = a.toggleForm();
-    dispatch(action2);
   }
 
-  handleEditingTicketInList = (ticketToEdit) => {
-    const { dispatch } = this.props;
-    const action = a.addTicket(ticketToEdit);
-    dispatch(action);
+  handleEditingTicketInList = () => {
     this.setState({editing: false});
     this.setState({selectedTicket: null});
   }
 
   handleChangingSelectedTicket = (id) => {
-    const selectedTicket = this.props.masterTicketList[id];
-    this.setState({selectedTicket: selectedTicket});
+    // Do we want to deconstruct when we can't do so with delete? Keep consistent?
+    // const { get } = this.props.firestore;
+    this.props.firestore.get({collection: 'tickets', doc: id}).then((ticket) => {
+      const firestoreTicket = {
+        names: ticket.get("names"),
+        location: ticket.get("location"),
+        issue: ticket.get("issue"),
+        id: ticket.id
+      }
+      this.setState({selectedTicket: firestoreTicket });
+    });
   }
 
   handleDeletingTicket = (id) => {
-    const { dispatch } = this.props;
-    const action = a.deleteTicket(id);
-    dispatch(action);
+    this.props.firestore.delete({collection: 'tickets', doc: id});
     this.setState({selectedTicket: null});
   }
 
@@ -118,4 +120,5 @@ const mapStateToProps = state => {
 
 NewTicketControl = connect(mapStateToProps)(NewTicketControl);
 
-export default NewTicketControl;
+// withFirestore needed to add Firestore to props
+export default withFirestore(NewTicketControl);

@@ -1,9 +1,9 @@
 import * as c from './ActionTypes';
-import { db } from './../firebase';
+import firebase from './../firebase';
 
 export const addTicket = (ticket) => {
   const { names, location, issue } = ticket;
-  return () => db.collection("tickets").add({
+  return () => firebase.db.collection("tickets").add({
     names: names,
     location: location,
     issue: issue,
