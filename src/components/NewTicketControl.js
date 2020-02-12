@@ -19,6 +19,7 @@ class NewTicketControl extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.firestore)
     this.waitTimeUpdateTimer = setInterval(() =>
       this.updateTicketElapsedWaitTime(),
     60000
@@ -62,8 +63,6 @@ class NewTicketControl extends React.Component {
   }
 
   handleChangingSelectedTicket = (id) => {
-    // Do we want to deconstruct when we can't do so with delete? Keep consistent?
-    // const { get } = this.props.firestore;
     this.props.firestore.get({collection: 'tickets', doc: id}).then((ticket) => {
       const firestoreTicket = {
         names: ticket.get("names"),
@@ -113,12 +112,10 @@ NewTicketControl.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    masterTicketList: state.masterTicketList,
     formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
 NewTicketControl = connect(mapStateToProps)(NewTicketControl);
 
-// withFirestore needed to add Firestore to props
 export default withFirestore(NewTicketControl);

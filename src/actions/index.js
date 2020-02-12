@@ -1,15 +1,15 @@
 import * as c from './ActionTypes';
 import firebase from './../firebase';
 
-export const addTicket = (ticket) => {
-  const { names, location, issue } = ticket;
-  return () => firebase.db.collection("tickets").add({
-    names: names,
-    location: location,
-    issue: issue,
-    timeOpen: new Date().getTime()
-  });
-}
+// export const addTicket = (ticket) => {
+//   const { names, location, issue } = ticket;
+//   return () => firebase.db.collection("tickets").add({
+//     names: names,
+//     location: location,
+//     issue: issue,
+//     timeOpen: new Date().getTime()
+//   });
+// }
 
 // export const addTicket = (ticket) => {
 //     const { names, location, issue } = ticket;
