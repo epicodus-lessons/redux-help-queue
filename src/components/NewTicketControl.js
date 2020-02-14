@@ -19,7 +19,7 @@ class NewTicketControl extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.firestore)
+    debugger;
     this.waitTimeUpdateTimer = setInterval(() =>
       this.updateTicketElapsedWaitTime(),
     60000
@@ -31,13 +31,13 @@ class NewTicketControl extends React.Component {
   }
 
   updateTicketElapsedWaitTime = () => {
-    const { dispatch } = this.props;
-    Object.keys(this.props.masterTicketList).forEach(ticketId => {
-      const ticket = this.props.masterTicketList[ticketId];
-      const newFormattedWaitTime = ticket.timeOpen.fromNow(true);
-      const action = a.updateTime(ticketId, newFormattedWaitTime);
-      dispatch(action);
-    });
+    // const { dispatch } = this.props;
+    // Object.keys(this.props.masterTicketList).forEach(ticketId => {
+    //   const ticket = this.props.masterTicketList[ticketId];
+    //   const newFormattedWaitTime = ticket.timeOpen.fromNow(true);
+    //   const action = a.updateTime(ticketId, newFormattedWaitTime);
+    //   dispatch(action);
+    // });
   }
 
   handleClick = () => {
@@ -62,7 +62,8 @@ class NewTicketControl extends React.Component {
     this.setState({selectedTicket: null});
   }
 
-  handleChangingSelectedTicket = (id) => {
+  handleChangingSelectedTicket = (id) => 
+  {
     this.props.firestore.get({collection: 'tickets', doc: id}).then((ticket) => {
       const firestoreTicket = {
         names: ticket.get("names"),
