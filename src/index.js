@@ -10,6 +10,7 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import firebase from "./firebase";
 // import { store } from "./store";
+import 'firebase/auth'
 
 import rootReducer from './reducers/index';
 // import thunk from 'redux-thunk';
@@ -19,7 +20,9 @@ const store = createStore(rootReducer);
 const rrfProps = {
   firebase,
   config: {
-		userProfile: "users"
+    userProfile: "users",
+    useFirestoreForProfile: true,
+    // enableClaims: true // Get custom claims along with the profile
 	},
   dispatch: store.dispatch,
   createFirestoreInstance
