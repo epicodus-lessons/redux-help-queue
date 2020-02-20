@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "redux-help-queue"
+    "default": "redux-help-queue",
+    "deployed": "redux-help-queue-e51d9"
   }
 }

@@ -6,7 +6,7 @@ import EditTicketForm from './EditTicketForm';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import * as a from './../actions';
-import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
+import { withFirestore, isLoaded } from 'react-redux-firebase';
 
 class NewTicketControl extends React.Component {
 
@@ -94,7 +94,8 @@ class NewTicketControl extends React.Component {
           <h1>You must be signed in to access the queue.</h1>
         </React.Fragment>
       )
-    } else {
+    } 
+    if ((isLoaded(auth)) && (auth.currentUser != null)) {
       let currentlyVisibleState = null;
       let buttonText = "Return to Ticket List";
       if (this.state.editing ) {      

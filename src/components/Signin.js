@@ -23,7 +23,6 @@ function Signin(){
     }).catch(function(error) {
       console.log(error.message);
     });
-  
   }
 
   function doSignOut() {
